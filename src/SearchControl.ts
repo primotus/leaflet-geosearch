@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as L from 'leaflet';
 import { ControlPosition, FeatureGroup, MarkerOptions, Map } from 'leaflet';
 import SearchElement from './SearchElement';
@@ -349,7 +350,8 @@ const Control: SearchControl = {
       return;
     }
 
-    const query = (event.target as HTMLInputElement).value;
+    const target = (event.target as HTMLInputElement);
+    const query = target.shadowRoot ? ((event as any).path[0] as HTMLInputElement).value : target.value;
     const { provider } = this.options;
 
     if (query.length) {
